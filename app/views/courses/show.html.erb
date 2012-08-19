@@ -22,7 +22,9 @@
 
 <p>
   <b>Sections:</b>
-  <%= @course.sections[0].time.strftime("%l:%M %p %Z") %> on <%= @course.sections[0].date.strftime("%B %e, %Y") %>
+	<% if @course.sections[0]%>
+  		<%= @course.sections[0].time.strftime("%l:%M %p %Z") %> on <%= 		@course.sections[0].date.strftime("%B %e, %Y") %>
+	<% end %>
 </p>
 
 <%= link_to 'Add a new section', new_section_path(:course_id => @course.id) %>
