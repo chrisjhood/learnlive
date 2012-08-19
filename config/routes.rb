@@ -1,4 +1,12 @@
 LearnLive::Application.routes.draw do
+  resources :reviews
+
+  resources :testimonials
+
+  resources :sections
+
+  resources :courses
+
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
   root :to => 'pages#home'
