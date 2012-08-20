@@ -23,6 +23,10 @@ end
 
 group :development, :test do
   gem 'quiet_assets'
+  gem 'rspec-rails', '~> 2.0'
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec'
 end
 
 gem 'jquery-rails'

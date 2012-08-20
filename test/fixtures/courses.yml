@@ -6,7 +6,6 @@ one:
   user_id: 1
   objective: MyText
   prequisites: MyText
-  rating: 1
 
 two:
   title: MyString
@@ -14,4 +13,3 @@ two:
   user_id: 1
   objective: MyText
   prequisites: MyText
-  rating: 1
