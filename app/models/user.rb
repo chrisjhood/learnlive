@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :users, :bio, :role
+  validates :email, :presence => :true, :uniqueness => :true, :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+  validates :password, :length => { :within => 6..30}, :format => {:with => /^\w*(?=\w*\d)(?=\w*[a-z])(?=\w*[A-Z])\w*$/ }
+  validates :first_name, :presence => :true
+  validates :last_name, :presence => :true
 
   has_and_belongs_to_many :courses
   has_many :sections, :through => :courses
@@ -17,7 +21,7 @@ class User < ActiveRecord::Base
     where(auth.slice(:provier, :uid)).first_or_create do |user|
       user.provider     = auth.provider
       user.uid          = auth.uid
-      user.email        = auth.info.email
+      user.email        = auth.info.email.downcase
       user.first_name   = auth.info.first_name
       user.last_name    = auth.info.last_name
       user.fb_token     = auth.credentials.token
