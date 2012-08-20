@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @course.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @course.description %>
+</p>
+
+<p>
+  <b>Objective:</b>
+  <%= @course.objective %>
+</p>
+
+<p>
+  <b>Prequisites:</b>
+  <%= @course.prequisites %>
+</p>
+
+<p>
+  <b>Sections:</b>
+	<% if @course.sections[0]%>
+  		<%= @course.sections[0].time.strftime("%l:%M %p %Z") %> on <%= 		@course.sections[0].date.strftime("%B %e, %Y") %>
+	<% end %>
+</p>
+
+<%= link_to 'Add a new section', new_section_path(:course_id => @course.id) %>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>
