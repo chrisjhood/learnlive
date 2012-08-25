@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
          :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :bio, :role
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :bio, :role, :token
   validates :email, :presence => :true, :uniqueness => :true, :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
-  validates :password, :length => { :within => 6..30}, :format => {:with => /^\w*(?=\w*\d)(?=\w*[a-z])(?=\w*[A-Z])\w*$/ }
+  #validates :password, :length => { :within => 6..30}, :format => {:with => /^\w*(?=\w*\d)(?=\w*[a-z])(?=\w*[A-Z])\w*$/ }
   validates :first_name, :presence => :true
   validates :last_name, :presence => :true
 
