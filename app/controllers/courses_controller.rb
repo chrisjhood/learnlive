@@ -1,12 +1,12 @@
 class CoursesController < ApplicationController
 
-  before_filter :require_admin, :only => [:destroy, :edit] 
-  before_filter :require_authorization, :only => [:destroy, :edit] 
+  #before_filter :require_admin, :only => [:destroy, :edit] 
+  # before_filter :require_authorization, :only => [:destroy, :edit] 
   before_filter :require_login, :except => [:index, :show] 
 
-  def require_authorization
-    redirect_to root_url, notice: "You are not authorized." unless current_user.id == @course.user_id
-  end
+  # def require_authorization
+  #   redirect_to root_url, notice: "You are not authorized." unless current_user.id == @course.user_id
+  # end
 
   # GET /courses
   # GET /courses.json
@@ -43,7 +43,10 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+
     @course = Course.find(params[:id])
+
+
   end
 
   # POST /courses
