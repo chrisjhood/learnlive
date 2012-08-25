@@ -9,7 +9,33 @@
   <b>Time:</b>
   <%= @section.time %>
 </p>
+<ul>
+<% @messages.each do |message| %>
+<%= render 'messages/message', :message => message %>
+<% end %>
+</ul>
+
+<%= render 'messages/form' %>
+
+<p>
+  <b>SessionId:</b>
+  <%= @section.session_id %>
+</p>
+
+<p>
+  <b>Token:</b>
+  <% if session[:token] %>
+  <%= session[:token] %>
+  <%else%>
+  <%=link_to "Get token", get_token_path %>
+  <%end%>
+
 
 
 <%= link_to 'Edit', edit_section_path(@section) %> |
 <%= link_to 'Back', sections_path %>
+<br>
+token<%= session[:token] %><br>
+user id <%= current_user.id %><br>
+section session id <%= @section.session_id %><br>
+

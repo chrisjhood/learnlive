@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120820135352) do
+ActiveRecord::Schema.define(:version => 20120825170816) do
 
   create_table "courses", :force => true do |t|
     t.string   "title"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(:version => 20120820135352) do
     t.text     "prequisites"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "connection_id"
   end
 
   create_table "reviews", :force => true do |t|
@@ -37,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20120820135352) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "course_id"
+    t.string   "session_id"
   end
 
   create_table "testimonials", :force => true do |t|
@@ -67,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20120820135352) do
     t.string   "uid"
     t.string   "provider"
     t.string   "expires_at"
+    t.string   "token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

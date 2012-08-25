@@ -1,10 +1,7 @@
 class SectionsController < ApplicationController
+
   # GET /sections
   # GET /sections.json
-
-  def find_id
-    course_id
-  end
 
   def index
     @sections = Section.all
@@ -19,11 +16,26 @@ class SectionsController < ApplicationController
   # GET /sections/1.json
   def show
     @section = Section.find(params[:id])
+    @message = Message.new
+    @messages = Message.all
+
+    @API_KEY = '17321802'
+
+
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @section }
     end
+  end
+
+  def get_token
+    @API_KEY = '17321802'
+    @API_SECRET = '3a90fda1362d50aed4b04f3f01456153d2e956be'
+    @OTSDK = OpenTok::OpenTokSDK.new @API_KEY, @API_SECRET
+    session[:token] = @OTSDK.generateToken :session_id => @session_id, :role => OpenTok::RoleConstants::PUBLISHER
+
+    redirect_to :back
   end
 
   # GET /sections/new
@@ -49,7 +61,7 @@ class SectionsController < ApplicationController
   def create
     @section = Section.new(params[:section])
     #@section.course_id = courses[:id]
-   
+
     respond_to do |format|
       if @section.save
         format.html { redirect_to @section, notice: 'Section was successfully created.' }
