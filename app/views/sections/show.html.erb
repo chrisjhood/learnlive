@@ -43,7 +43,7 @@
 
 			TB.addEventListener("exception", exceptionHandler);
 			var session = TB.initSession("<%=@section.session_id%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
-			TB.setLogLevel(5);
+			//TB.setLogLevel(5);
 			
 			session.addEventListener("sessionConnected", sessionConnectedHandler);
 			session.addEventListener("streamCreated", streamCreatedHandler);
