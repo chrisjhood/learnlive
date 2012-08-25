@@ -1,4 +1,13 @@
 class CoursesController < ApplicationController
+
+  #before_filter :require_admin, :only => [:destroy, :edit] 
+  # before_filter :require_authorization, :only => [:destroy, :edit] 
+  before_filter :require_login, :except => [:index, :show] 
+
+  # def require_authorization
+  #   redirect_to root_url, notice: "You are not authorized." unless current_user.id == @course.user_id
+  # end
+
   # GET /courses
   # GET /courses.json
   def index
@@ -34,13 +43,17 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+
     @course = Course.find(params[:id])
+
+
   end
 
   # POST /courses
   # POST /courses.json
   def create
     @course = Course.new(params[:course])
+    @course.user_id = current_user.id
 
     respond_to do |format|
       if @course.save
@@ -73,6 +86,7 @@ class CoursesController < ApplicationController
   # DELETE /courses/1.json
   def destroy
     @course = Course.find(params[:id])
+    raise @course.user_id.inspect
     @course.destroy
 
     respond_to do |format|

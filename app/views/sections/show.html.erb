@@ -9,102 +9,29 @@
   <b>Time:</b>
   <%= @section.time %>
 </p>
-<%#= if  %>
 <ul>
 <% @messages.each do |message| %>
 <%= render 'messages/message', :message => message %>
 <% end %>
 </ul>
-<%# end %>
+
 <%= render 'messages/form' %>
+
+<p>
+  <b>SessionId:</b>
+  <%= @section.session_id %>
+</p>
+
+<p>
+  <b>Token:</b>
+  <% if session[:token] %>
+  <%= session[:token] %>
+  <%else%>
+  <%=link_to "Get token", get_token_path %>
+  <%end%>
+
+
 
 <%= link_to 'Edit', edit_section_path(@section) %> |
 <%= link_to 'Back', sections_path %>
 
-<!-- tok-box chat -->
-
-<script type='text/javascript'>
-
-      // Public vars
-      var session;
-
-      // Initialize OpenTok stuff
-      (function() {
-        var apiKey = 1127; // OpenTok sample API key. Replace with your own API key.
-        var sessionId =   ; // Replace with your session ID.
-        var token = j("<%= session[:token] %>"); // Should not be hard-coded.
-
-        session = TB.initSession(sessionId);
-
-        // This class does all the video publishing and subscribing for us
-        OT_Widget.init(session, "streamContainer", 800, 300);
-
-        // Set up event handler to listen for signals
-        session.addEventListener("signalReceived", signalReceivedHandler);
-
-        session.connect(apiKey, token);
-      })();
-
-      // Event handler for receiving signals called
-      // by session.signal() from other clients in session
-      function signalReceivedHandler(event) {
-        getChatEntry(event.fromConnection.connectionId);
-      }
-
-
-      // Gets the latest chat entry from the database
-      // given somebody's connectionId
-      function getChatEntry(connectionId) {
-        $.ajax({
-          url: '/chat_entries/latest/' + connectionId,
-          success: function(data) {
-            $("#chat").append("<li><strong>"
-              + data.chat_entry.connectionId
-              + ":</strong> " + data.chat_entry.body + "</li>")
-          }
-        })
-      }
-
-      // Posts a new chat entry in to the database
-      function postChatEntry(body) {
-        var data = {
-          connectionId: session.connection.connectionId,
-          body: body
-        }
-
-        $.ajax({
-          url: '/chat_entries/add',
-          data: data,
-          type: 'POST',
-          success: function(data) {
-            // Signal to other clients that we have inserted new data
-            session.signal();
-          }
-        })
-      }
-
-      // Initialize UI bindings
-      $(window).load(function() {
-        // Add chat entry if enter button clicked
-        $("#chatButton").bind('click', function() {
-          processChatEntry();
-        });
-
-        // Add chat entry if enter pressed in text box
-        $("#chatBody").keypress(function(e) {
-          if (e.keyCode == 13) {
-            processChatEntry();
-          }
-        })
-
-        function processChatEntry() {
-          // If body is empty, don't do anything
-          if (!$("#chatBody").val()) return;
-
-          postChatEntry($("#chatBody").val());
-
-          // Clear the text input
-          $("#chatBody").val('');
-        }
-      })
-    </script>

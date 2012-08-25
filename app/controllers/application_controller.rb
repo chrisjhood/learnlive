@@ -5,4 +5,15 @@ class ApplicationController < ActionController::Base
   def not_facebook_user
     current_user.provider.blank?
   end
+
+  def require_login
+	redirect_to root_url, notice: 'Please login.' unless current_user
+  end
+
+	
+
+  def require_admin
+  		redirect_to root_url, notice: "This is a restricted area." unless current_user.role == "Admin"
+  end
+
 end
