@@ -22,23 +22,63 @@
   <%else%>
   <%=link_to "Get token", get_token_path %>
   <%end%>
-   
+
 
 </p>
 <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
+
+			var session;
+			var publisher;
+			var subscribers = {};
+
 			TB.addEventListener("exception", exceptionHandler);
 			var session = TB.initSession("<%=@section.session_id%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
 			TB.setLogLevel(5);
 			
 			session.addEventListener("sessionConnected", sessionConnectedHandler);
 			session.addEventListener("streamCreated", streamCreatedHandler);
-			session.connect('<%=@API_KEY%>', "<%=session[:token]%>"); // Replace with your API key and token. See http://www.tokbox.com/
-			
+			// session.connect('<%=@API_KEY%>', "<%=session[:token]%>"); // Replace with your API key and token. See http://www.tokbox.com/
+		
+		function connect() {
+			session.connect('<%=@API_KEY%>', "<%=session[:token]%>");
+		}		
+
+		function disconnect() {
+			session.disconnect();
+			hide('disconnectLink');
+			hide('publishLink');
+			hide('unpublishLink');
+		}
+
+		function startPublishing() {
+		if (!publisher) {
+			var parentDiv = document.getElementById("myCamera");
+			var publisherDiv = document.createElement('div'); // Create a div for the publisher to replace
+			publisherDiv.setAttribute('id', 'opentok_publisher');
+			parentDiv.appendChild(publisherDiv);
+			var publisherProps = {width: 200, height: 200};
+			publisher = TB.initPublisher('<%=@API_KEY%>', publisherDiv.id, publisherProps);  // Pass the replacement div id and properties
+			session.publish(publisher);
+			show('unpublishLink');
+			hide('publishLink');
+			}
+		}
+
+		function stopPublishing() {
+			if (publisher) {
+				session.unpublish(publisher);
+			}
+			publisher = null;
+
+			show('publishLink');
+			hide('unpublishLink');
+		}
+
 			function sessionConnectedHandler(event) {
 				 subscribeToStreams(event.streams);
-				 session.publish();
+				 //session.publish();
 			}
 			
 			function streamCreatedHandler(event) {
@@ -63,6 +103,23 @@
 			
 
 		</script>
+
+
+	<div id="opentok_console"></div>
+	<div id="links">
+       	<input type="button" value="Connect" id ="connectLink" onClick="javascript:connect()" />
+       	<input type="button" value="Leave" id ="disconnectLink" onClick="javascript:disconnect()" />
+       	<input type="button" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()" />
+       	<input type="button" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()" />
+	</div>
+	<div id="myCamera" class="publisherContainer"></div>
+	<div id="subscribers"></div>
+
+
+	<script type="text/javascript" charset="utf-8">
+		show('connectLink');
+	</script>
+
 
 <%= link_to 'Edit', edit_section_path(@section) %> |
 <%= link_to 'Back', sections_path %>
