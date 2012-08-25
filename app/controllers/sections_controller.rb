@@ -1,11 +1,7 @@
 class SectionsController < ApplicationController
-  
+
   # GET /sections
   # GET /sections.json
-
-  def find_id
-    course_id
-  end
 
   def index
     @sections = Section.all
