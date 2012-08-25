@@ -9,7 +9,14 @@
   <b>Time:</b>
   <%= @section.time %>
 </p>
-
+<%#= if  %>
+<ul>
+<% @messages.each do |message| %>
+<%= render 'messages/message', :message => message %>
+<% end %>
+</ul>
+<%# end %>
+<%= render 'messages/form' %>
 
 <%= link_to 'Edit', edit_section_path(@section) %> |
 <%= link_to 'Back', sections_path %>

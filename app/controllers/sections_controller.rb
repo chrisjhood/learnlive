@@ -19,6 +19,8 @@ class SectionsController < ApplicationController
   # GET /sections/1.json
   def show
     @section = Section.find(params[:id])
+    @message = Message.new
+    @messages = Message.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -49,7 +51,7 @@ class SectionsController < ApplicationController
   def create
     @section = Section.new(params[:section])
     #@section.course_id = courses[:id]
-   
+
     respond_to do |format|
       if @section.save
         format.html { redirect_to @section, notice: 'Section was successfully created.' }
