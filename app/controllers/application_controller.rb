@@ -7,17 +7,13 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-  	@user = User.find_by_id(session[:user_id])
-	redirect_to root_url, notice: 'Please login.' unless @user.present?
+	redirect_to root_url, notice: 'Please login.' unless current_user
   end
 
-  def require_authorization
-  	redirect_to root_url, notice: "You are not authorized." unless session[:user_id]==params[:id].to_i
-  end
+	
 
   def require_admin
-  	@user = User.find_by_id(session[:user_id])
-  	redirect_to root_url, notice: "This is a restricted area." unless @user.role == "Admin"
+  		redirect_to root_url, notice: "This is a restricted area." unless current_user.role == "Admin"
   end
 
 end
