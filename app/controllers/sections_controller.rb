@@ -22,10 +22,7 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:id])
 
     @API_KEY = '17321802'
-    @API_SECRET = '3a90fda1362d50aed4b04f3f01456153d2e956be'
-    @OTSDK = OpenTok::OpenTokSDK.new @API_KEY, @API_SECRET
 
-    @session_id = @OTSDK.createSession(request.ip)
 
 
     respond_to do |format|

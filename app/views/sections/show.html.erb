@@ -12,22 +12,24 @@
 
 <p>
   <b>SessionId:</b>
-  <%= @session_id %>
+  <%= @section.session_id %>
 </p>
 
 <p>
   <b>Token:</b>
   <% if session[:token] %>
   <%= session[:token] %>
+  <%else%>
+  <%=link_to "Get token", get_token_path %>
   <%end%>
-   <%=link_to "Get token", get_token_path %>
+   
 
 </p>
 <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
 			TB.addEventListener("exception", exceptionHandler);
-			var session = TB.initSession("<%=@session_id%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
+			var session = TB.initSession("<%=@section.session_id%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
 			TB.setLogLevel(5);
 			
 			session.addEventListener("sessionConnected", sessionConnectedHandler);
