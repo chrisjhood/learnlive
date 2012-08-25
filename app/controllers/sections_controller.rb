@@ -1,11 +1,7 @@
 class SectionsController < ApplicationController
-  
+
   # GET /sections
   # GET /sections.json
-
-  def find_id
-    course_id
-  end
 
   def index
     @sections = Section.all
@@ -20,6 +16,8 @@ class SectionsController < ApplicationController
   # GET /sections/1.json
   def show
     @section = Section.find(params[:id])
+    @message = Message.new
+    @messages = Message.all
 
     @API_KEY = '17321802'
 
@@ -63,7 +61,7 @@ class SectionsController < ApplicationController
   def create
     @section = Section.new(params[:section])
     #@section.course_id = courses[:id]
-   
+
     respond_to do |format|
       if @section.save
         format.html { redirect_to @section, notice: 'Section was successfully created.' }
