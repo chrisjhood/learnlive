@@ -28,7 +28,12 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+html{
+	height: 100%;
+}
 body {
+	background-image:url('3.jpg');
+	height: 100%;
 	line-height: 1;
 }
 ol, ul {
@@ -51,7 +56,10 @@ table {
 
 /*Defaults*/
 
+
 .container{
+	/*background-image:url('3.jpg');*/
+	height: 100%;
 	margin:auto;
 	background: orange;
 }
@@ -63,9 +71,10 @@ table {
 /*HEADER*/
 
 header{
-	margin-top: 10px;
+	
+	margin-top: 0px;
 	margin-bottom: 10px;
-	border-bottom: 2px solid yellow;
+	/*border-bottom: 3px solid yellow;*/
 }
 
 .logo{
@@ -77,32 +86,38 @@ header{
 .header_tabs li{
 	float: right;
 	padding: 15px;
-	font-size: 25px;
+	font-size: 20px;
 }
 
 /*END HEADER*/
 
 /*FOOTER*/
 
-.copyright{
+/*.copyright{
 	float:left;
 }
-
+*/
 .footer_tabs li{
-	float: right;
+	width: 100%;
+/*	position: center; */
+	bottom: auto; 
+	display: inline;
+	text-align: center; 
 }
 
 .copyright, .footer_tabs li{
 	padding: 10px;
 	font-size: 20px;
 /*	background: yellow;*/
-	margin-bottom: 80px;
+	margin-bottom: 0px;
 }
 
 
 footer{
-	margin-bottom: 10px;
-	margin-top: 160px;
+	text-align: center; 
+	position: relative; 
+	margin-top: -7.5em;
+
 }
 
 /*END FOOTER*/
@@ -120,9 +135,12 @@ footer{
 /*End Grid Markings*/
 
 .wrap{
+	height: 100%;
 	width: 960px;
 	margin: auto;
 }
+
+
 
 section {
 	float:left;
