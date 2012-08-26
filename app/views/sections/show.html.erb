@@ -19,7 +19,7 @@
 
 <p>
   <b>SessionId:</b>
-  <%= @section.session_id %>
+  <%= '2_MX4xNzMyMTgwMn4xMjcuMC4wLjF-U2F0IEF1ZyAyNSAxODozMzoyNyBQRFQgMjAxMn4wLjcwOTU0NTU1fg' %>
 </p>
 
 <p>
@@ -42,7 +42,7 @@
 			var subscribers = {};
 
 			TB.addEventListener("exception", exceptionHandler);
-			var session = TB.initSession("<%=@section.session_id%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
+			var session = TB.initSession("<%='2_MX4xNzMyMTgwMn4xMjcuMC4wLjF-U2F0IEF1ZyAyNSAxODozMzoyNyBQRFQgMjAxMn4wLjcwOTU0NTU1fg'%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
 			//TB.setLogLevel(5);
 			
 			session.addEventListener("sessionConnected", sessionConnectedHandler);
@@ -134,5 +134,5 @@
 <br>
 token<%= session[:token] %><br>
 user id <%= current_user.id %><br>
-section session id <%= @section.session_id %><br>
+section session id <%= '2_MX4xNzMyMTgwMn4xMjcuMC4wLjF-U2F0IEF1ZyAyNSAxODozMzoyNyBQRFQgMjAxMn4wLjcwOTU0NTU1fg' %><br>
 
