@@ -1,5 +1,12 @@
 class CoursesController < ApplicationController
 
+
+  # layout 'homepage', :only => [:index]
+
+  #before_filter :require_admin, :only => [:destroy, :edit] 
+  # before_filter :require_authorization, :only => [:destroy, :edit] 
+
+
   before_filter :require_login, :except => [:index, :show] 
   before_filter :require_authorization_or_admin, :only => [:destroy, :edit] 
   
