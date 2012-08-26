@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <b>Date:</b>
   <%= @section.date %>
 </p>
+<%=current_user.role%>
 
 <p>
   <b>Time:</b>
@@ -43,10 +45,13 @@
 
 			TB.addEventListener("exception", exceptionHandler);
 			var session = TB.initSession("<%=@section.session_id%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
-			//TB.setLogLevel(5);
+			TB.setLogLevel(5);
 			
 			session.addEventListener("sessionConnected", sessionConnectedHandler);
+			session.addEventListener("sessionDisconnected", sessionDisconnectedHandler);
 			session.addEventListener("streamCreated", streamCreatedHandler);
+			session.addEventListener("streamDestroyed", streamDestroyedHandler);
+			session.addEventListener("signalReceived", signalReceivedHandler);
 			// session.connect('<%=@API_KEY%>', "<%=session[:token]%>"); // Replace with your API key and token. See http://www.tokbox.com/
 		
 		function connect() {
@@ -102,6 +107,8 @@
 				}
 			}
 			
+			
+			
 			function exceptionHandler(event) {
 				if (event.code == 1013) {	
 					document.body.innerHTML = "This page is trying to connect a third client to an OpenTok peer-to-peer session. "
@@ -132,7 +139,8 @@
 <%= link_to 'Edit', edit_section_path(@section) %> |
 <%= link_to 'Back', sections_path %>
 <br>
-token<%= session[:token] %><br>
-user id <%= current_user.id %><br>
-section session id <%= @section.session_id %><br>
+token<%#= session[:token] %><br>
+user id <%#= current_user.id %><br>
+section session id <%#= @section.session_id %><br>
+
 
