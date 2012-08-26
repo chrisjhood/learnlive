@@ -16,10 +16,10 @@
         </ul> -->
           <ul class="header_tabs">
     <% if user_signed_in? %>
-      <li><strong><%= current_user.email %></strong></li>
+      <li><strong>Welcome back <%= current_user.first_name %></strong></li>
        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
       <li> <%= link_to 'Edit profile', edit_user_registration_path %> |</li>
-     
+
     <% else %>
       <li><%= link_to "Sign up", new_user_registration_path %> |</li>
       <li><%= link_to "Log in", new_user_session_path %></li>
@@ -38,7 +38,7 @@
 <%= yield %>
         </div>
     <footer>
-        
+
         <!-- <div class="copyright"> &copy; Mind Peel</div> -->
         <ul class="footer_tabs">
           <li><a href="#">&copy; Mind Peel</a></li>
@@ -49,7 +49,7 @@
         </ul>
         <div class="clear"></div>
     </footer>
-    
+
 
 </body>
 </html>

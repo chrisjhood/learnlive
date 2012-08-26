@@ -29,5 +29,7 @@
 
 <%= link_to 'Add a new section', new_section_path(:course_id => @course.id) %>
 
+<%= link_to "Enter Class(get token)", get_token_path, :id => @course.id %>
+
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>

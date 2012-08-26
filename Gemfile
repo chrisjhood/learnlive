@@ -5,6 +5,8 @@ gem 'omniauth-facebook'
 gem 'devise'
 gem 'jquery-rails'
 gem 'opentok'
+gem 'private_pub'
+gem 'thin'
 
 group :production do
   gem 'pg'

@@ -7,13 +7,13 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-	redirect_to root_url, notice: 'Please login.' unless current_user
+  	redirect_to root_url, notice: 'Please login.' unless current_user
   end
 
-	
+
 
   def require_admin
-  		redirect_to root_url, notice: "This is a restricted area." unless current_user.role == "Admin"
+  	redirect_to root_url, notice: "This is a restricted area." unless current_user.role == "Admin"
   end
 
 end
