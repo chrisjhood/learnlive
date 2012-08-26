@@ -11,6 +11,7 @@
 <div class="container">
       <div class="header">
         <div class="header_content">
+<<<<<<< HEAD
           <!-- <div class="logo">MindPeel</div> -->
           <%= link_to "MindPeel", root_url, :class => 'logo' %>
 
@@ -20,9 +21,12 @@
             </div>
             
           <div class="user_buttons"> 
+=======
+          <div class="logo">MindPeel</div>
+          <div class="nav_header"></div>
+          <div class="user_buttons">
+>>>>>>> ea667880172b594a29a1526ff746a49df9796883
             <% if user_signed_in? %>
-             <!--  <input type="button" class="button" value="Sign Up"/>&nbsp;
-            <input type="button" class="button" value="Log In"/> -->
               <%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'button' %>
               <%= button_to 'Edit profile', edit_user_registration_path, :class => 'button' %>
             <% else %>
@@ -35,11 +39,19 @@
       </div>
   <div class="clear"></div>
       </header>
+<<<<<<< HEAD
 <div class="content">
 <%= yield %>
 </div>        
     <footer>
         
+=======
+
+<div class="content"><%= yield %></div>
+
+<footer>
+
+>>>>>>> ea667880172b594a29a1526ff746a49df9796883
         <!-- <div class="copyright"> &copy; Mind Peel</div> -->
         <ul class="footer_tabs">
           <li><a href="#">&copy; Mind Peel</a></li>
@@ -50,7 +62,6 @@
         </ul>
         <div class="clear"></div>
     </footer>
-    </div> 
-  
+    </div>
 </body>
 </html>

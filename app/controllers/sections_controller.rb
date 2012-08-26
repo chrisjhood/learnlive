@@ -17,11 +17,8 @@ class SectionsController < ApplicationController
   def show
     @section = Section.find(params[:id])
     @message = Message.new
-    @messages = Message.all
-
+    @messages = Message.for_classroom(params[:id])
     @API_KEY = '17321802'
-
-
 
     respond_to do |format|
       format.html # show.html.erb

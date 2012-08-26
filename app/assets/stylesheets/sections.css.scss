@@ -1,3 +1,12 @@
 // Place all the styles related to the Sections controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.chat_window { background-color: white;
+               margin: 10px;
+               border-radius: 5px;
+               border: solid 1px black;
+               max-width: 40%;
+  ul         { text-align: left;
+               margin: 5px;
+    li       { font-family: helvetica;
+               color: black;}}}
