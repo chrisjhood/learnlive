@@ -97,7 +97,7 @@
 				for (i = 0; i < streams.length; i++) {
 					var stream = streams[i];
 					if (stream.connection.connectionId != session.connection.connectionId) {
-						session.subscribe(stream);
+						session.addStream(stream);
 					}
 				}
 			}
@@ -108,6 +108,16 @@
 						+ "Only two clients can connect to peer-to-peer sessions.";
 				}
 			}
+
+			function addStream(stream) {
+				// Check if this is the stream that I am publishing, and if so do not publish.
+				var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
+				subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
+				document.getElementById("subscribers").appendChild(subscriberDiv);
+				var subscriberProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT};
+				subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id, subscriberProps);
+			}
+
 			
 
 </script>
