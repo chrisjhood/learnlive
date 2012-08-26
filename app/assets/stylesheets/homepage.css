@@ -3,6 +3,7 @@ body{
 	margin:0;
 	padding:0;
 	height: 100%;
+	font-size: 30px;
 }
 html{
 	height: 100%;
@@ -12,10 +13,8 @@ html{
 	margin:auto;
 	width:100%;
 }
-
-
 ul{
-	
+
 	list-style:none;
 }
 .clear{
@@ -33,7 +32,7 @@ ul{
 	height:100%;
 	line-height:75px;
 	position:relative;
-	
+
 }
 .nav_header{
 	 border-left: 1px solid #cfcfcf;
@@ -49,7 +48,8 @@ form{
 	display: inline;
 }
 .header{
-	
+
+
 	height:75px;
 	margin-top: 0px;
 	margin-bottom: 10px;
@@ -80,7 +80,7 @@ form{
 	font-size:10pt;
 	cursor:pointer;
 	float: left;
-	
+
 }
 .button:hover{
 	background:-moz-linear-gradient(top,  #60CBFA,  #359CD2);
@@ -105,7 +105,7 @@ form{
 	width:350px;
 	height:150px;
 	line-height:150px;
-	
+
 	background:#EBEBE9;
 	border:1px solid #cfcfcf;
 	margin-top:15px;
@@ -125,7 +125,7 @@ form{
 	padding:7px;
 	padding-left:20px;
 	padding-right:20px;
-	
+
 }
 a.teach{background:#594456}
 a.learn{
@@ -135,9 +135,9 @@ a.learn{
 .footer_tabs li{
 	width: 100%;
 /*	position: center; */
-	bottom: auto; 
+	bottom: auto;
 	display: inline;
-	text-align: center; 
+	text-align: center;
 }
 
 .copyright, .footer_tabs li{
@@ -149,9 +149,9 @@ a.learn{
 
 
 footer{
-	text-align: center; 
-	/*background: orange;*/
-	position: relative; 
-	/*margin-top: -7.5em;*/
-
+	background-color: white;
+	text-align: center;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
 }

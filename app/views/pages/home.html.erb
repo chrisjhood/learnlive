@@ -6,7 +6,8 @@
             <input type="button" class="button" value="Sign Up For MindPeel"/>
           </div>
           <div class="main_actions">
-            <div class="action"><a href="#" class="teach">Teach A Class</a></div>
-            <div class="action"><a href="#" class="learn">Take A Class</a></div>
+            <div class="action"><%= link_to "Teach a Class", new_course_path, :class => "teach" %></div>
+            <div class="action"><%= link_to "Take a Class", courses_path, :class => "learn" %></div>
+            <!-- <div class="action"><a href="#" class="learn">Take A Class</a></div> -->
           </div>
         </div>r

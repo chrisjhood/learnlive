@@ -1,21 +1,22 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 057642a26468849e43921bbd6a4efbb7f1534f9c
-<h1>Listing courses</h1>
-<div id="courses_list">
-        <% @courses.each do |course| %>
-    <div id="course_<%= course.id %>">
-        Title: <%= course.title %><br/>
-        Description: <%= course.description %><br/>
-        Objectives: <%= course.objective %><br/>
-        Prerequisits: <%= course.prequisites %><br/>
-        <%= link_to 'Show', course %>
-        <%= link_to 'Edit', edit_course_path(course) %>
-        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <h1>Listing courses</h1>
+    <div id="courses_list">
+            <% @courses.each do |course| %>
+        <div id="course_<%= course.id %>">
+            Title: <%= course.title %><br/>
+            Description: <%= course.description %><br/>
+            Objectives: <%= course.objective %><br/>
+            Prerequisits: <%= course.prequisites %><br/>
+            <div class="user_buttons">
+                    <%= link_to 'Show', course %>
+                <% if course.user_id == current_user.id %>
+                    <%= link_to 'Edit', edit_course_path(course) %>
+                    <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
+            </div>
+        </div>
+            <% end %>
     </div>
-        <% end %>
-</div>
-<br />
+    <br />
+    <%= link_to 'New Course', new_course_path %>
 
-<%= link_to 'New Course', new_course_path %>

@@ -8,7 +8,7 @@ LearnLive::Application.routes.draw do
   resources :sections
   resources :courses
 
-  resources :users
+  # resources :users
 
   match '/get_token' => "sections#get_token"
 
