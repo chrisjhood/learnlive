@@ -29,5 +29,8 @@
 
 <%= link_to 'Add a new section', new_section_path(:course_id => @course.id) %>
 
+<% if current_user.role == "Admin" %>
 <%= link_to 'Edit', edit_course_path(@course) %> |
+<%end%>
 <%= link_to 'Back', courses_path %>
+

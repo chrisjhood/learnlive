@@ -1,14 +1,29 @@
 class CoursesController < ApplicationController
 
+
   # layout 'homepage', :only => [:index]
 
   #before_filter :require_admin, :only => [:destroy, :edit] 
   # before_filter :require_authorization, :only => [:destroy, :edit] 
-  before_filter :require_login, :except => [:index, :show] 
 
-  # def require_authorization
-  #   redirect_to root_url, notice: "You are not authorized." unless current_user.id == @course.user_id
-  # end
+
+  before_filter :require_login, :except => [:index, :show] 
+  before_filter :require_authorization_or_admin, :only => [:destroy, :edit] 
+  
+  
+
+  def require_authorization_or_admin
+
+
+      if current_user.role != "Admin" && current_user.id != Course.find(params[:id]).user_id
+        redirect_to root_url
+      end
+
+    # redirect_to root_url, notice: "This is a restricted area." unless current_user.role == "Admin"
+
+
+    # redirect_to root_url, notice: "You are not authorized." unless current_user.id == Course.find(params[:id]).user_id
+  end
 
   # GET /courses
   # GET /courses.json
@@ -88,7 +103,6 @@ class CoursesController < ApplicationController
   # DELETE /courses/1.json
   def destroy
     @course = Course.find(params[:id])
-    raise @course.user_id.inspect
     @course.destroy
 
     respond_to do |format|
