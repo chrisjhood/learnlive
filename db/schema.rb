@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120826000542) do
+ActiveRecord::Schema.define(:version => 20120826025025) do
 
   create_table "courses", :force => true do |t|
     t.string   "title"
@@ -26,9 +26,8 @@ ActiveRecord::Schema.define(:version => 20120826000542) do
   create_table "messages", :force => true do |t|
     t.string   "body"
     t.integer  "user_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "connection_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "section_id"
   end
 

@@ -32,9 +32,9 @@ if Rails.env.development?
 
   100.times do |i|
   lorem = "Metus ac eros dictum aliquet nulla consectetur egestas. Who the fuck is Arthur Digby Sellers? It's all over, man! We call your fucking bluff! Placerat maecenas pulvinar nisl et nisl rhoncus at. Does this place look like I'm fucking married? Volutpat felis blandit in libero turpis, laoreet et. It increases the chances of conception. Molestie sed, volutpat et erat nulla ut orci. Hey, man, if my fucking ex-wife asked me to take care of her fucking dog while she and her boyfriend went to Honolulu, I'd tell her to go fuck herself. Quis neque consectetur tincidunt aliquam erat volutpat donec."
-  ipsum = "There's no fucking reason—here's my point, Dude—there's no fucking reason. Faucibus tristique nullam non accumsan justo nulla facilisi integer. I know my rights. Interdum elementum nulla, nec eleifend nisl euismod ac maecenas. Vitae eros velit, eu suscipit erat integer purus lacus, Fortunately I've been adhering to a pretty strict drug regimen to keep my mind, you know, limber. Pretium vel venenatis eu, volutpat non erat donec a. I did not watch my buddies die face down in the mud so that this fucking strumpet."
+  ipsum = "There's no fucking reason here's my point, Dude there's no fucking reason. Faucibus tristique nullam non accumsan justo nulla facilisi integer. I know my rights. Interdum elementum nulla, nec eleifend nisl euismod ac maecenas. Vitae eros velit, eu suscipit erat integer purus lacus, Fortunately I've been adhering to a pretty strict drug regimen to keep my mind, you know, limber. Pretium vel venenatis eu, volutpat non erat donec a. I did not watch my buddies die face down in the mud so that this fucking strumpet."
 
-    Course.create(  :title => "Learn this now #{rand(0..9)}#{i}"
+    Course.create(  :title => "Learn this now #{rand(0..9)}#{i}",
                     :description => lorem,
                     :user_id => rand(0..100),
                     :objective => lorem,
@@ -42,5 +42,33 @@ if Rails.env.development?
                  )
   end
 
+  # review the course
+  100.times do
+    response = ["fantastic, this was a great course", "I would never do this again", "I have not seen a better group of people learning together", "wonderful", "awful"]
 
+    Review.create( :section_id => rand(0..100),
+                   :comment => response[rand(0..4)],
+                   :rating => rand(1..10)
+                 )
+  end
+
+  # sections
+
+  100.times do
+    @OTSDK = OpenTok::OpenTokSDK.new '17321802', '3a90fda1362d50aed4b04f3f01456153d2e956be'
+    Section.create(
+                    :time => Time.now + rand(6..8700454),
+                    :course_id => rand(0..100),
+                    :session_id => @OTSDK.generateToken
+                  )
+  end
+
+  # testimonials
+
+  # 100.times do
+
+  #   User.create( :user_id => rand(0..100),
+  #                :comment => "There's no fucking reason here's my point, Dude there's no fucking reason. Faucibus tristique nullam non accumsan justo nulla facilisi integer. I know my rights. Interdum elementum nulla, nec eleifend nisl euismod ac maecenas. Vitae eros velit, eu suscipit erat integer purus lacus, Fortunately I've been adhering to a pretty strict drug regimen to keep my mind, you know, limber. Pretium vel venenatis eu, volutpat non erat donec a."
+  #               )
+  # end
 end

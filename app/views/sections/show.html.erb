@@ -10,16 +10,16 @@
   <%= @section.time %>
 </p>
 
+<div class="chat_window">
+	<ul id="chat">
+		<%= subscribe_to "/messages/new/#{@section.id}" %>
+		<% @messages.each do |message| %>
+		<%= render 'messages/message', :message => message %>
+		<% end %>
+	</ul>
 
-<ul id="chat">
-	<%= subscribe_to "/messages/new/#{@section.id}" %>
-	<% @messages.each do |message| %>
-	<%= render 'messages/message', :message => message %>
-	<% end %>
-</ul>
-
-<%= render 'messages/form' %>
-
+	<%= render 'messages/form' %>
+</div>
 
 
 
@@ -33,13 +33,7 @@
 
 			TB.addEventListener("exception", exceptionHandler);
 			var session = TB.initSession("<%=@section.session_id%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
-<<<<<<< HEAD
 			TB.setLogLevel(5);
-
-=======
-			//TB.setLogLevel(5);
-			
->>>>>>> 057642a26468849e43921bbd6a4efbb7f1534f9c
 			session.addEventListener("sessionConnected", sessionConnectedHandler);
 			session.addEventListener("streamCreated", streamCreatedHandler);
 		  session.connect('<%=@API_KEY%>', "<%=session[:token]%>"); // Replace with your API key and token. See http://www.tokbox.com/
@@ -105,11 +99,9 @@
 			}
 
 </script>
-<<<<<<< HEAD
 
 </div>
-=======
->>>>>>> 057642a26468849e43921bbd6a4efbb7f1534f9c
+
 
 
 	<div id="opentok_console"></div>
