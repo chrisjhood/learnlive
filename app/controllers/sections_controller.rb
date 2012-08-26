@@ -30,10 +30,17 @@ class SectionsController < ApplicationController
   end
 
   def get_token
+
+    if current_user.role == "Teacher"
+      ot_role = OpenTok::RoleConstants::MODERATOR
+    else
+      ot_role = OpenTok::RoleConstants::PUBLISHER
+     end
+
     @API_KEY = '17321802'
     @API_SECRET = '3a90fda1362d50aed4b04f3f01456153d2e956be'
     @OTSDK = OpenTok::OpenTokSDK.new @API_KEY, @API_SECRET
-    session[:token] = @OTSDK.generateToken :session_id => @session_id, :role => OpenTok::RoleConstants::PUBLISHER
+    session[:token] = @OTSDK.generateToken :session_id => @session_id, :role => ot_role
 
     redirect_to :back
   end
