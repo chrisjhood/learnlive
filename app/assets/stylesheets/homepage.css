@@ -45,6 +45,10 @@ ul{
     text-align: center;
     width: 400px;
 }
+#sub_nav{width: 98px;
+	padding-right: 65px;
+	display: inline;
+}
 form{
 	display: inline;
 }
@@ -80,7 +84,8 @@ form{
 	font-size:10pt;
 	cursor:pointer;
 	float: left;
-	
+
+
 }
 .button:hover{
 	background:-moz-linear-gradient(top,  #60CBFA,  #359CD2);
@@ -150,8 +155,9 @@ a.learn{
 
 footer{
 	text-align: center; 
-	/*background: orange;*/
-	position: relative; 
-	/*margin-top: -7.5em;*/
+	position: fixed;
+	bottom: 0px; 
+	width: 100%;
+	
 
 }

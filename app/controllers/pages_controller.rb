@@ -6,4 +6,8 @@ layout 'homepage'
   def home
 
   end
+
+  def teach
+  end
+  
 end
