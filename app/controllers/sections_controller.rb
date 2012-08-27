@@ -27,7 +27,7 @@ class SectionsController < ApplicationController
   end
 
   def get_token
-
+    
     if current_user.role == "Teacher"
       ot_role = OpenTok::RoleConstants::MODERATOR
     else
