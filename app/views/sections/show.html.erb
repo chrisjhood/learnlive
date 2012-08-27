@@ -1,34 +1,33 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <b>Date:</b>
   <%= @section.date %>
 </p>
+<%=current_user.role%>
 
 <p>
   <b>Time:</b>
   <%= @section.time %>
 </p>
-<ul>
-<% @messages.each do |message| %>
-<%= render 'messages/message', :message => message %>
-<% end %>
-</ul>
-
-<%= render 'messages/form' %>
 
 <p>
   <b>SessionId:</b>
   <%= '2_MX4xNzMyMTgwMn4xMjcuMC4wLjF-U2F0IEF1ZyAyNSAxODozMzoyNyBQRFQgMjAxMn4wLjcwOTU0NTU1fg' %>
 </p>
 
-<p>
-  <b>Token:</b>
-  <% if session[:token] %>
-  <%= session[:token] %>
-  <%else%>
-  <%=link_to "Get token", get_token_path %>
-  <%end%>
+<div class="chat_window">
+	<ul id="chat">
+		<%= subscribe_to "/messages/new/#{@section.id}" %>
+		<% @messages.each do |message| %>
+		<%= render 'messages/message', :message => message %>
+		<% end %>
+	</ul>
+
+
+	<%= render 'messages/form' %>
+</div>
 
 
 
@@ -36,22 +35,27 @@
 <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
-
 			var session;
 			var publisher;
 			var subscribers = {};
 
 			TB.addEventListener("exception", exceptionHandler);
-			var session = TB.initSession("<%='2_MX4xNzMyMTgwMn4xMjcuMC4wLjF-U2F0IEF1ZyAyNSAxODozMzoyNyBQRFQgMjAxMn4wLjcwOTU0NTU1fg'%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
-			//TB.setLogLevel(5);
-			
+
+			var session = TB.initSession("<%=@section.session_id%>"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
+			TB.setLogLevel(5);
+
 			session.addEventListener("sessionConnected", sessionConnectedHandler);
+			session.addEventListener("sessionDisconnected", sessionDisconnectedHandler);
 			session.addEventListener("streamCreated", streamCreatedHandler);
+		  session.connect('<%=@API_KEY%>', "<%=session[:token]%>"); // Replace with your API key and token. See http://www.tokbox.com/
+
+			session.addEventListener("streamDestroyed", streamDestroyedHandler);
+			session.addEventListener("signalReceived", signalReceivedHandler);
 			// session.connect('<%=@API_KEY%>', "<%=session[:token]%>"); // Replace with your API key and token. See http://www.tokbox.com/
-		
+
 		function connect() {
 			session.connect('<%=@API_KEY%>', "<%=session[:token]%>");
-		}		
+		}
 
 		function disconnect() {
 			session.disconnect();
@@ -86,13 +90,13 @@
 
 			function sessionConnectedHandler(event) {
 				 subscribeToStreams(event.streams);
-				 //session.publish();
+				 session.publish();
 			}
-			
+
 			function streamCreatedHandler(event) {
 				subscribeToStreams(event.streams);
 			}
-			
+
 			function subscribeToStreams(streams) {
 				for (i = 0; i < streams.length; i++) {
 					var stream = streams[i];
@@ -101,13 +105,14 @@
 					}
 				}
 			}
-			
+
 			function exceptionHandler(event) {
-				if (event.code == 1013) {	
+				if (event.code == 1013) {
 					document.body.innerHTML = "This page is trying to connect a third client to an OpenTok peer-to-peer session. "
 						+ "Only two clients can connect to peer-to-peer sessions.";
 				}
 			}
+
 
 			function addStream(stream) {
 				// Check if this is the stream that I am publishing, and if so do not publish.
@@ -118,9 +123,11 @@
 				subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id, subscriberProps);
 			}
 
-			
 
 </script>
+
+</div>
+
 
 
 	<div id="opentok_console"></div>
@@ -134,15 +141,19 @@
 	<div id="subscribers"></div>
 
 
-	<script type="text/javascript" charset="utf-8">
-		show('connectLink');
-	</script>
+	 <script type="text/javascript" charset="utf-8">
+	 	show('connectLink');
+	 </script>
 
 
 <%= link_to 'Edit', edit_section_path(@section) %> |
+
 <%= link_to 'Back', sections_path %>
 <br>
 token<%= session[:token] %><br>
 user id <%= current_user.id %><br>
 section session id <%= '2_MX4xNzMyMTgwMn4xMjcuMC4wLjF-U2F0IEF1ZyAyNSAxODozMzoyNyBQRFQgMjAxMn4wLjcwOTU0NTU1fg' %><br>
+
+=======
+<%= link_to 'Back', sections_path %>
 

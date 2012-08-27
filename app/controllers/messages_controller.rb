@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(params[:message])
     @message.user_id = current_user.id
-
+    # PrivatePub.publish_to("/messages/new", "#{@message.body}")
     respond_to do |format|
       if @message.save
         format.js
@@ -82,4 +82,6 @@ class MessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 end
