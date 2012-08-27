@@ -11,13 +11,7 @@
   <b>Time:</b>
   <%= @section.time %>
 </p>
-<ul>
-<% @messages.each do |message| %>
-<%= render 'messages/message', :message => message %>
-<% end %>
-</ul>
 
-<%= render 'messages/form' %>
 
 <p>
   <b>SessionId:</b>
@@ -31,10 +25,8 @@
   <%else%>
   <%=link_to "Get token", get_token_path %>
   <%end%>
-
-
-
 </p>
+
 <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
